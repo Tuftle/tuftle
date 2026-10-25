@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "version": "1.0.0",
+  "id": "quiet-sidebar",
+  "name": "quiet sidebar",
+  "author": "tuftle",
+  "tags": [
+    "calm",
+    "layout"
+  ],
+  "description": "dims the tab list until you point at it, so the page has your attention.",
+  "preview": {
+    "bar": "#e9dfcd",
+    "tab": "#f4ecdc",
+    "url": "#fffaf0",
+    "ink": "#4a3a2c",
+    "accent": "#b9784a",
+    "radius": 12
+  },
+  "css": "#sidebar-main { opacity: .45; transition: opacity .25s ease; }\n#sidebar-main:hover, #sidebar-main:focus-within { opacity: 1; }\n",
+  "prefs": {}
+}

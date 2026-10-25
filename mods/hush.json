@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "version": "1.0.0",
+  "id": "hush",
+  "name": "hush",
+  "author": "tuftle",
+  "tags": [
+    "minimal",
+    "calm"
+  ],
+  "description": "hides the little icons in the address bar and the close buttons on tabs you are not using.",
+  "preview": {
+    "bar": "#f1ebdf",
+    "tab": "#f9f4ea",
+    "url": "#fffaf0",
+    "ink": "#4a3a2c",
+    "accent": "#8a4b2a",
+    "radius": 10
+  },
+  "css": "#identity-box .identity-icon-label, #tracking-protection-icon-container, #page-action-buttons > :not(#star-button-box) { display: none !important; }\n.tab-close-button:not([selected]) { display: none !important; }\n",
+  "prefs": {}
+}

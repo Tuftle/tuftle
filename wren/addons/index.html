@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>wren add-ons · tuftle</title>
+  <meta name="description" content="small mods that change how wren looks. pick one, add it, take it off whenever you like.">
+  <link rel="icon" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="/"><img src="/assets/logo.svg" alt="">tuftle<small>wren add-ons</small></a>
+      <nav class="main"><a href="/wren">wren</a><a href="/wren/addons" aria-current="page">add-ons</a><a href="/wren/addons/build">build one</a></nav>
+    </header>
+
+    <section class="hero">
+      <h1>make wren look like yours.</h1>
+      <p>small mods that restyle the browser, written by people who like tidy windows. add one with a click, and take it off just as easily. nothing here can read your pages.</p>
+    </section>
+
+    <div class="tag-row" id="tags" role="group" aria-label="filter by kind"></div>
+    <section class="grid" id="grid" aria-live="polite"></section>
+
+    <section class="panel" id="get-wren" hidden>
+      <h2>you need wren to add these</h2>
+      <p>mods are built for wren, a quiet, warm browser. open this page in wren and the add button works. you can still read what any mod does, and download it to try later.</p>
+    </section>
+
+    <section class="panel">
+      <h2>write your own</h2>
+      <p>a mod is one small file: some css, and maybe a setting or two. <a href="/wren/addons/build">read how it works</a>. it takes about five minutes.</p>
+    </section>
+
+    <footer><span>tuftle · from <i>tüfteln</i>, to tinker with patience</span><span>wren, nook and tuftle are made by one person, slowly.</span></footer>
+  </div>
+  <script src="/assets/site.js"></script>
+  <script>
+    (async () => {
+      const { el, windowPreview, installButton } = Tuftle;
+      const { mods } = await (await fetch("/mods/index.json")).json();
+      const grid = document.getElementById("grid"), tagBox = document.getElementById("tags");
+      const tags = ["all", ...new Set(mods.flatMap(m => m.tags))];
+      let current = "all";
+      const draw = () => {
+        grid.textContent = "";
+        for (const m of mods.filter(m => current == "all" || m.tags.includes(current))) {
+          const card = el("a", { class: "card", href: "/wren/addons/mod?id=" + m.id },
+            windowPreview(m.preview), el("h3", { text: m.name }), el("p", { text: m.description }),
+            el("div", { class: "meta" }, el("span", { class: "by", text: "by " + m.author }), installButton(m.id)));
+          grid.append(card);
+        }
+      };
+      for (const t of tags) {
+        const chip = el("button", { class: "chip", text: t, "aria-pressed": String(t == current) });
+        chip.addEventListener("click", () => {
+          current = t;
+          tagBox.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(c == chip)));
+          draw();
+        });
+        tagBox.append(chip);
+      }
+      draw();
+      if (!Tuftle.inWren) document.getElementById("get-wren").hidden = false;
+    })();
+  </script>
+</body>
+</html>

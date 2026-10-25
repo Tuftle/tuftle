@@ -1,0 +1,167 @@
+{
+  "mods": [
+    {
+      "id": "round-and-soft",
+      "name": "round and soft",
+      "version": "1.0.0",
+      "author": "tuftle",
+      "description": "rounder tabs, a pill-shaped address bar and softer corners everywhere.",
+      "tags": [
+        "shape",
+        "calm"
+      ],
+      "preview": {
+        "bar": "#efe6d6",
+        "tab": "#f9f3e8",
+        "url": "#fffaf0",
+        "ink": "#4a3a2c",
+        "accent": "#b9784a",
+        "radius": 14
+      },
+      "prefs": []
+    },
+    {
+      "id": "ember-glow",
+      "name": "ember glow",
+      "version": "1.0.0",
+      "author": "tuftle",
+      "description": "the address bar glows amber when you click it, like a fire starting up.",
+      "tags": [
+        "colour",
+        "warm"
+      ],
+      "preview": {
+        "bar": "#2a211a",
+        "tab": "#3a2d23",
+        "url": "#1f1812",
+        "ink": "#ecd9bf",
+        "accent": "#e8883a",
+        "radius": 10
+      },
+      "prefs": []
+    },
+    {
+      "id": "moonlit",
+      "name": "moonlit",
+      "version": "1.0.0",
+      "author": "tuftle",
+      "description": "a cool, night-blue window instead of brown. easy on the eyes after dark.",
+      "tags": [
+        "colour",
+        "dark"
+      ],
+      "preview": {
+        "bar": "#151a24",
+        "tab": "#202838",
+        "url": "#0f131b",
+        "ink": "#cdd8ea",
+        "accent": "#7aa2f7",
+        "radius": 10
+      },
+      "prefs": []
+    },
+    {
+      "id": "hush",
+      "name": "hush",
+      "version": "1.0.0",
+      "author": "tuftle",
+      "description": "hides the little icons in the address bar and the close buttons on tabs you are not using.",
+      "tags": [
+        "minimal",
+        "calm"
+      ],
+      "preview": {
+        "bar": "#f1ebdf",
+        "tab": "#f9f4ea",
+        "url": "#fffaf0",
+        "ink": "#4a3a2c",
+        "accent": "#8a4b2a",
+        "radius": 10
+      },
+      "prefs": []
+    },
+    {
+      "id": "snug",
+      "name": "snug",
+      "version": "1.0.0",
+      "author": "tuftle",
+      "description": "everything a little tighter, so pages get more room.",
+      "tags": [
+        "layout",
+        "compact"
+      ],
+      "preview": {
+        "bar": "#ebe2d2",
+        "tab": "#f5eddf",
+        "url": "#fffaf0",
+        "ink": "#4a3a2c",
+        "accent": "#a15a34",
+        "radius": 6
+      },
+      "prefs": [
+        "browser.uidensity"
+      ]
+    },
+    {
+      "id": "bookmarks-on-new-tab",
+      "name": "bookmarks on new tabs only",
+      "version": "1.0.0",
+      "author": "tuftle",
+      "description": "the bookmarks bar only shows on a new tab, so it stays out of your way the rest of the time.",
+      "tags": [
+        "layout",
+        "minimal"
+      ],
+      "preview": {
+        "bar": "#f3ecdf",
+        "tab": "#faf5ea",
+        "url": "#fffaf0",
+        "ink": "#4a3a2c",
+        "accent": "#8a4b2a",
+        "radius": 10
+      },
+      "prefs": [
+        "browser.toolbars.bookmarks.visibility"
+      ]
+    },
+    {
+      "id": "no-extensions-button",
+      "name": "no extensions button",
+      "version": "1.0.0",
+      "author": "tuftle",
+      "description": "hides the puzzle-piece button when you do not use extensions.",
+      "tags": [
+        "minimal"
+      ],
+      "preview": {
+        "bar": "#f1e9da",
+        "tab": "#f8f2e6",
+        "url": "#fffaf0",
+        "ink": "#4a3a2c",
+        "accent": "#8a4b2a",
+        "radius": 10
+      },
+      "prefs": []
+    },
+    {
+      "id": "quiet-sidebar",
+      "name": "quiet sidebar",
+      "version": "1.0.0",
+      "author": "tuftle",
+      "description": "dims the tab list until you point at it, so the page has your attention.",
+      "tags": [
+        "calm",
+        "layout"
+      ],
+      "preview": {
+        "bar": "#e9dfcd",
+        "tab": "#f4ecdc",
+        "url": "#fffaf0",
+        "ink": "#4a3a2c",
+        "accent": "#b9784a",
+        "radius": 12
+      },
+      "prefs": []
+    }
+  ]
+}

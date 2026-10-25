@@ -1,0 +1,31 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/addons",
+      "destination": "/wren/addons",
+      "permanent": false
+    },
+    {
+      "source": "/addons/:path*",
+      "destination": "/wren/addons/:path*",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/mods/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300"
+        }
+      ]
+    }
+  ]
+}

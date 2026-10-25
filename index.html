@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>tuftle · small things, made patiently</title>
+  <meta name="description" content="tuftle makes wren, a quiet warm browser, and nook, a quiet search engine. no accounts, nothing following you.">
+  <link rel="icon" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="/"><img src="/assets/logo.svg" alt="">tuftle</a>
+      <nav class="main"><a href="/wren">wren</a><a href="https://nooksearch.vercel.app">nook</a><a href="/wren/addons">add-ons</a></nav>
+    </header>
+
+    <section class="lead">
+      <h1>small things, made patiently.</h1>
+      <p>tuftle makes a browser and a search engine that stay out of your way. from the german <i>tüfteln</i>: to work on a tricky thing with care, for as long as it takes, until it is right.</p>
+      <div class="row"><a class="btn lg" href="/wren">meet wren</a><a class="btn lg alt" href="https://nooksearch.vercel.app">try nook</a></div>
+    </section>
+
+    <section class="products" aria-label="what tuftle makes">
+      <a class="product" href="/wren">
+        <div class="mark">w</div>
+        <h2>wren</h2>
+        <p>a quiet, warm browser, built on firefox. cream and brown, serif and lowercase. a little bird hatches when you open it for the first time.</p>
+        <span class="go">see wren &rarr;</span>
+      </a>
+      <a class="product" href="https://nooksearch.vercel.app">
+        <div class="mark">n</div>
+        <h2>nook</h2>
+        <p>a search engine with no accounts and no logs. it answers questions right in the address bar, and shows maps, weather and books as you type.</p>
+        <span class="go">open nook &rarr;</span>
+      </a>
+    </section>
+
+    <section class="section">
+      <h2>how we make things</h2>
+      <p class="sub">three promises that every tuftle thing keeps.</p>
+      <div class="three">
+        <div><h3>nothing follows you</h3><p>no trackers, no accounts, no quiet data collection. what you do stays on your computer.</p></div>
+        <div><h3>calm on purpose</h3><p>warm colours, one typeface, gentle sounds you can turn off. a tool, not a feed.</p></div>
+        <div><h3>yours to change</h3><p>small mods restyle wren in a few lines. anyone can write one, and you see what it does first.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>wren add-ons</h2>
+      <p class="sub">a few ways to make the browser look like yours.</p>
+      <div class="grid" id="grid"></div>
+      <a class="btn alt" href="/wren/addons">see all add-ons</a>
+    </section>
+
+    <footer><span>tuftle · from <i>tüfteln</i>, to tinker with patience</span><span>made by one person, slowly.</span></footer>
+  </div>
+  <script src="/assets/site.js"></script>
+  <script>
+    (async () => {
+      const { el, windowPreview, installButton } = Tuftle;
+      const { mods } = await (await fetch("/mods/index.json")).json();
+      const grid = document.getElementById("grid");
+      for (const m of mods.slice(0, 3)) {
+        grid.append(el("a", { class: "card", href: "/wren/addons/mod?id=" + m.id },
+          windowPreview(m.preview), el("h3", { text: m.name }), el("p", { text: m.description }),
+          el("div", { class: "meta" }, el("span", { class: "by", text: "by " + m.author }), installButton(m.id))));
+      }
+    })();
+  </script>
+</body>
+</html>

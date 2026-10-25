@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mod · tuftle</title>
+  <link rel="icon" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="/"><img src="/assets/logo.svg" alt="">tuftle<small>wren add-ons</small></a>
+      <nav class="main"><a href="/wren">wren</a><a href="/wren/addons">add-ons</a><a href="/wren/addons/build">build one</a></nav>
+    </header>
+
+    <main id="main"><p class="empty">one moment…</p></main>
+
+    <footer><span><a href="/wren/addons">&larr; all add-ons</a></span><span>tuftle · from <i>tüfteln</i>, to tinker with patience</span></footer>
+  </div>
+  <script src="/assets/site.js"></script>
+  <script>
+    (async () => {
+      const { el, windowPreview, installButton, getMod } = Tuftle;
+      const main = document.getElementById("main");
+      const id = new URLSearchParams(location.search).get("id") || "";
+      const index = (await (await fetch("/mods/index.json")).json()).mods;
+      let mod, meta = index.find(m => m.id == id);
+      try { mod = await getMod(id); } catch (e) { main.replaceChildren(el("p", { class: "empty", text: "there is no mod with that name." })); return; }
+      document.title = mod.name + " · tuftle";
+      const download = el("a", { class: "btn alt", text: "download json", href: "/mods/" + id + ".json", download: id + ".json" });
+      const prefs = Object.entries(mod.prefs || {});
+      main.replaceChildren(
+        el("section", { class: "mod-head" },
+          el("div", {}, el("h1", { text: mod.name }), el("p", { text: mod.description }),
+            el("div", { class: "row" }, installButton(id), download),
+            el("p", { class: "by", text: "by " + mod.author + " · version " + mod.version })),
+          windowPreview(meta.preview, true)),
+        el("section", { class: "panel" }, el("h2", { text: "what it changes" }),
+          el("p", { text: mod.css.trim() ? "it adds the style below to the browser window. it can restyle things, but it cannot read your pages or send anything out." : "it only changes the settings listed here." }),
+          prefs.length ? el("p", { text: "settings it sets: " + prefs.map(([k, v]) => k + " = " + v).join(", ") }) : null),
+        mod.css.trim() ? el("pre", { class: "code", text: mod.css }) : null);
+    })();
+  </script>
+</body>
+</html>

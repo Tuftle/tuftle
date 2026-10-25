@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "version": "1.0.0",
+  "id": "ember-glow",
+  "name": "ember glow",
+  "author": "tuftle",
+  "tags": [
+    "colour",
+    "warm"
+  ],
+  "description": "the address bar glows amber when you click it, like a fire starting up.",
+  "preview": {
+    "bar": "#2a211a",
+    "tab": "#3a2d23",
+    "url": "#1f1812",
+    "ink": "#ecd9bf",
+    "accent": "#e8883a",
+    "radius": 10
+  },
+  "css": "#urlbar[focused=\"true\"] > #urlbar-background {\n  box-shadow: 0 0 0 2px #e8883a, 0 0 18px 2px rgba(232, 136, 58, .45) !important;\n  transition: box-shadow .25s ease;\n}\n",
+  "prefs": {}
+}

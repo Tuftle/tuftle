@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "version": "1.0.0",
+  "id": "round-and-soft",
+  "name": "round and soft",
+  "author": "tuftle",
+  "tags": [
+    "shape",
+    "calm"
+  ],
+  "description": "rounder tabs, a pill-shaped address bar and softer corners everywhere.",
+  "preview": {
+    "bar": "#efe6d6",
+    "tab": "#f9f3e8",
+    "url": "#fffaf0",
+    "ink": "#4a3a2c",
+    "accent": "#b9784a",
+    "radius": 14
+  },
+  "css": "#urlbar-background { border-radius: 999px !important; }\n.tab-background { border-radius: 14px !important; }\n#nav-bar toolbarbutton .toolbarbutton-icon { border-radius: 10px !important; }\n",
+  "prefs": {}
+}

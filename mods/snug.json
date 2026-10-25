@@ -1,0 +1,24 @@
+{
+  "format": 1,
+  "version": "1.0.0",
+  "id": "snug",
+  "name": "snug",
+  "author": "tuftle",
+  "tags": [
+    "layout",
+    "compact"
+  ],
+  "description": "everything a little tighter, so pages get more room.",
+  "preview": {
+    "bar": "#ebe2d2",
+    "tab": "#f5eddf",
+    "url": "#fffaf0",
+    "ink": "#4a3a2c",
+    "accent": "#a15a34",
+    "radius": 6
+  },
+  "prefs": {
+    "browser.uidensity": 1
+  },
+  "css": "#nav-bar { padding-block: 0 !important; }\n#urlbar { --urlbar-min-height: 28px !important; }\n"
+}

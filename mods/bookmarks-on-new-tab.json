@@ -1,0 +1,24 @@
+{
+  "format": 1,
+  "version": "1.0.0",
+  "id": "bookmarks-on-new-tab",
+  "name": "bookmarks on new tabs only",
+  "author": "tuftle",
+  "tags": [
+    "layout",
+    "minimal"
+  ],
+  "description": "the bookmarks bar only shows on a new tab, so it stays out of your way the rest of the time.",
+  "preview": {
+    "bar": "#f3ecdf",
+    "tab": "#faf5ea",
+    "url": "#fffaf0",
+    "ink": "#4a3a2c",
+    "accent": "#8a4b2a",
+    "radius": 10
+  },
+  "prefs": {
+    "browser.toolbars.bookmarks.visibility": "newtab"
+  },
+  "css": ""
+}

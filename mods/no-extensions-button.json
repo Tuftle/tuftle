@@ -1,0 +1,21 @@
+{
+  "format": 1,
+  "version": "1.0.0",
+  "id": "no-extensions-button",
+  "name": "no extensions button",
+  "author": "tuftle",
+  "tags": [
+    "minimal"
+  ],
+  "description": "hides the puzzle-piece button when you do not use extensions.",
+  "preview": {
+    "bar": "#f1e9da",
+    "tab": "#f8f2e6",
+    "url": "#fffaf0",
+    "ink": "#4a3a2c",
+    "accent": "#8a4b2a",
+    "radius": 10
+  },
+  "css": "#unified-extensions-button { display: none !important; }\n",
+  "prefs": {}
+}

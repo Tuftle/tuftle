@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>wren · a quiet, warm browser</title>
+  <meta name="description" content="wren is a quiet, warm browser built on firefox. no accounts, nothing following you. made by tuftle.">
+  <link rel="icon" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="/assets/stage.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="/"><img src="/assets/logo.svg" alt="">tuftle</a>
+      <nav class="main"><a href="/wren" aria-current="page">wren</a><a href="https://nooksearch.vercel.app">nook</a><a href="/wren/addons">add-ons</a></nav>
+    </header>
+
+    <section class="split">
+      <div>
+        <span class="status">in the works &middot; windows first</span>
+        <h1>a quiet, warm place to browse.</h1>
+        <p>wren is a browser that feels like a lamp left on in the next room. nothing is sent home, and nothing follows you around.</p>
+        <div class="row"><button class="btn lg" disabled>download soon</button><a class="btn lg alt" href="/wren/addons">browse add-ons</a></div>
+      </div>
+      <div class="stage" aria-hidden="true">
+<svg viewBox="0 0 300 400" aria-hidden="true">
+      <defs>
+        <radialGradient id="shell" cx=".36" cy=".3" r=".85">
+          <stop offset="0" stop-color="#fffbf2"/><stop offset=".45" stop-color="#f5ead6"/><stop offset="1" stop-color="#d7c3a0"/>
+        </radialGradient>
+        <radialGradient id="inside" cx=".5" cy=".55" r=".6">
+          <stop offset="0" stop-color="#ffe3b0"/><stop offset="1" stop-color="#b9763e"/>
+        </radialGradient>
+        <radialGradient id="burst" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#fff1cc" stop-opacity=".95"/><stop offset=".5" stop-color="#ffc77a" stop-opacity=".4"/><stop offset="1" stop-color="#ffc77a" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter>
+        <filter id="glowblur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5"/></filter>
+        <clipPath id="cut-top"><polygon points="20,-40 280,-40 280,201 262,198 236,178 208,204 180,174 152,206 126,172 98,204 70,176 40,200 20,201"/></clipPath>
+        <clipPath id="cut-bottom"><polygon points="20,201 40,200 70,176 98,204 126,172 152,206 180,174 208,204 236,178 262,198 280,201 280,440 20,440"/></clipPath>
+        <path id="eggshape" d="M150 26C96 26 52 124 52 218c0 78 43 134 98 134s98-56 98-134C248 124 204 26 150 26z"/>
+      </defs>
+
+      <ellipse class="shadow" cx="150" cy="364" rx="92" ry="12" fill="#000" opacity=".28" filter="url(#soft)"/>
+      <circle class="burst" cx="150" cy="210" r="170" fill="url(#burst)"/>
+
+      <g class="chick">
+        <g transform="translate(0 30)"><g class="chick-body">
+          <ellipse cx="156" cy="268" rx="62" ry="46" fill="#8a4b2a"/>
+          <circle cx="104" cy="226" r="31" fill="#8a4b2a"/>
+          <path d="M196 262c30-9 40-52 33-96-3-9-17-7-17 3 0 32-14 52-40 62z" fill="#8a4b2a"/>
+          <path d="M76 220L42 214l32 18z" fill="#8a4b2a"/>
+          <path d="M136 260c18-12 50-12 68 8-18 20-60 20-78 0 3-3 5-5 10-8z" fill="#e0a870"/>
+          <path d="M128 304v14M154 304v14" stroke="#8a4b2a" stroke-width="7" stroke-linecap="round"/>
+          <g class="eye"><circle cx="96" cy="220" r="5.4" fill="#f4efe6"/><circle cx="98" cy="218" r="1.7" fill="#8a4b2a"/></g>
+          <path class="tuft" d="M99 192c-2-9 1-16 7-20M109 194c1-9 6-14 12-16" stroke="#8a4b2a" stroke-width="5" fill="none" stroke-linecap="round"/>
+        </g></g>
+      </g>
+
+      <g class="egg">
+        <g class="bottom" clip-path="url(#cut-bottom)">
+          <use href="#eggshape" fill="url(#shell)"/>
+          <use href="#eggshape" fill="none" stroke="#cdb78f" stroke-width="2.5"/>
+          <g fill="#8a5a36" opacity=".26"><circle cx="110" cy="262" r="4"/><circle cx="168" cy="300" r="3.4"/><circle cx="206" cy="256" r="3"/><circle cx="130" cy="318" r="2.6"/><circle cx="82" cy="236" r="2.8"/><circle cx="186" cy="332" r="2.2"/><circle cx="224" cy="292" r="2.4"/></g>
+        </g>
+        <g class="top" clip-path="url(#cut-top)">
+          <use href="#eggshape" fill="url(#shell)"/>
+          <use href="#eggshape" fill="none" stroke="#cdb78f" stroke-width="2.5"/>
+          <g fill="#8a5a36" opacity=".26"><circle cx="132" cy="78" r="3.6"/><circle cx="178" cy="104" r="3"/><circle cx="104" cy="132" r="4.2"/><circle cx="198" cy="150" r="2.6"/><circle cx="150" cy="58" r="2.2"/><circle cx="126" cy="170" r="2.8"/><circle cx="214" cy="118" r="2.4"/><circle cx="88" cy="178" r="2.2"/></g>
+          <ellipse cx="108" cy="104" rx="20" ry="46" transform="rotate(18 108 104)" fill="#fff" opacity=".5" filter="url(#soft)"/>
+        </g>
+        <g class="cracks">
+          <path class="glow-line" d="M150 62L140 94L156 116L142 142L158 164L148 188" />
+          <path class="glow-line" d="M52 200L70 176L98 204L126 172L152 206L180 174L208 204L236 178L248 200"/>
+          <path class="crack-line" d="M150 62L140 94L156 116L142 142L158 164L148 188"/>
+          <path class="crack-line" d="M52 200L70 176L98 204L126 172L152 206L180 174L208 204L236 178L248 200"/>
+        </g>
+      </g>
+
+      <g class="shards" fill="#f5ead6" stroke="#cdb78f" stroke-width="2">
+        <path class="s1" d="M126 192l11-15 6 17z"/><path class="s2" d="M190 188l15-11-3 19z"/><path class="s3" d="M152 204l8-9 5 13z"/>
+      </g>
+      <g class="sparkles" fill="#ffd9a0">
+        <path class="sp a" d="M60 120l4-12 4 12 12 4-12 4-4 12-4-12-12-4z"/>
+        <path class="sp b" d="M236 96l3-9 3 9 9 3-9 3-3 9-3-9-9-3z"/>
+        <path class="sp c" d="M252 230l3-9 3 9 9 3-9 3-3 9-3-9-9-3z"/>
+        <path class="sp d" d="M44 262l3-9 3 9 9 3-9 3-3 9-3-9-9-3z"/>
+      </g>
+    </svg>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>what it does</h2>
+      <p class="sub">a short, honest list. everything here works today.</p>
+      <div class="feature-grid">
+      <div class="feature"><h3>answers in the address bar</h3><p>type a sum, a word or a place and the answer shows up before you press enter. it comes from nook, and nothing is stored.</p></div>
+      <div class="feature"><h3>a privacy page that shows its work</h3><p>see how many trackers and cookies wren turned away today, and which sites tried.</p></div>
+      <div class="feature"><h3>warm all day</h3><p>the window slowly shifts with the time of day, and each site can tint it a little. bedtime mode takes the blue out of the evening.</p></div>
+      <div class="feature"><h3>room to think</h3><p>focus mode hides the bars. workspaces keep projects apart. tabs you forget about go to sleep. a reading view cleans up long pages.</p></div>
+      <div class="feature"><h3>small sounds</h3><p>rain, a fire, a cafe or waves, made softly on your computer. the welcome has a music-box tune you can mute.</p></div>
+      <div class="feature"><h3>mods</h3><p>a small file restyles the whole window. add one from the add-ons page and take it off when you like.</p></div>
+      <div class="feature"><h3>firefox underneath</h3><p>wren is built on firefox, so it renders the web the way you expect, and runs the extensions you already use.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>what it does not do (yet)</h2>
+      <p class="sub">wren has no accounts, so there is no sync between your computers. it is also windows-only for now, and the first release is not out. when it is, it will be here.</p>
+    </section>
+
+    <footer><span>tuftle · from <i>tüfteln</i>, to tinker with patience</span><span>made by one person, slowly.</span></footer>
+  </div>
+  <script src="/assets/stage.js"></script>
+</body>
+</html>

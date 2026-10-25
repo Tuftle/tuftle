@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "version": "1.0.0",
+  "id": "moonlit",
+  "name": "moonlit",
+  "author": "tuftle",
+  "tags": [
+    "colour",
+    "dark"
+  ],
+  "description": "a cool, night-blue window instead of brown. easy on the eyes after dark.",
+  "preview": {
+    "bar": "#151a24",
+    "tab": "#202838",
+    "url": "#0f131b",
+    "ink": "#cdd8ea",
+    "accent": "#7aa2f7",
+    "radius": 10
+  },
+  "css": "#nav-bar, #sidebar-main, #TabsToolbar { background-color: #151a24 !important; color: #cdd8ea !important; }\n#urlbar-background { background-color: #0f131b !important; border-color: #2b3550 !important; }\n#urlbar[focused=\"true\"] > #urlbar-background { box-shadow: 0 0 0 2px #7aa2f7 !important; }\n",
+  "prefs": {}
+}

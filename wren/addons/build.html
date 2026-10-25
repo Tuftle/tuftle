@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>build a mod · tuftle</title>
+  <meta name="description" content="how to write a mod for wren: one small json file with some css.">
+  <link rel="icon" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="/"><img src="/assets/logo.svg" alt="">tuftle<small>wren add-ons</small></a>
+      <nav class="main"><a href="/wren">wren</a><a href="/wren/addons">add-ons</a><a href="/wren/addons/build" aria-current="page">build one</a></nav>
+    </header>
+
+    <article class="doc">
+      <h1>build a mod for wren</h1>
+      <p>a mod is a single json file. wren reads it, shows the person exactly what it does, and applies the css to the browser window. that is all there is to it. you do not need to build anything or learn a new language.</p>
+
+      <h2>the smallest mod</h2>
+      <pre class="code">{
+  "format": 1,
+  "id": "rounder-urlbar",
+  "name": "rounder address bar",
+  "version": "1.0.0",
+  "author": "you",
+  "description": "makes the address bar a pill.",
+  "css": "#urlbar-background { border-radius: 999px !important; }"
+}</pre>
+
+      <h2>the fields</h2>
+      <table class="t">
+        <tr><th>field</th><th>what it is</th></tr>
+        <tr><td>format</td><td>always <code>1</code> for now.</td></tr>
+        <tr><td>id</td><td>lowercase letters, numbers and dashes, 2 to 41 characters. it is the mod's name to wren, so keep it unique.</td></tr>
+        <tr><td>name, description</td><td>shown to the person before they add it. keep them plain and honest.</td></tr>
+        <tr><td>version, author</td><td>free text. bump the version when you change the file.</td></tr>
+        <tr><td>css</td><td>the style for the browser window itself, up to 200 kb. see the notes below.</td></tr>
+        <tr><td>prefs</td><td>optional settings to turn on while the mod is on. only the ones in the list below are allowed.</td></tr>
+      </table>
+
+      <h2>what the css can touch</h2>
+      <p>your css is added to every wren window, the toolbars, the tab list and the address bar, not to web pages. the usual places to start are <code>#nav-bar</code>, <code>#urlbar-background</code>, <code>#urlbar[focused="true"]</code>, <code>.tab-background</code>, <code>#sidebar-main</code> and <code>toolbarbutton</code>. wren is built on firefox, so any firefox <em>userChrome</em> guide applies. add <code>!important</code> when something refuses to change.</p>
+      <div class="notice">for safety, wren removes <code>@import</code> and any <code>url()</code> that points at the web. images must be inlined as <code>data:</code> urls. a mod can restyle the window, but it cannot load anything from the internet.</div>
+
+      <h2>settings a mod may set</h2>
+      <p>when the mod is turned off or removed, wren puts these back how they were.</p>
+      <table class="t">
+        <tr><th>setting</th><th>values</th></tr>
+        <tr><td>browser.uidensity</td><td><code>0</code> normal, <code>1</code> compact, <code>2</code> touch</td></tr>
+        <tr><td>browser.compactmode.show</td><td><code>true</code> or <code>false</code></td></tr>
+        <tr><td>browser.tabs.hoverPreview.enabled</td><td><code>true</code> or <code>false</code></td></tr>
+        <tr><td>browser.toolbars.bookmarks.visibility</td><td><code>"always"</code>, <code>"never"</code> or <code>"newtab"</code></td></tr>
+        <tr><td>browser.download.autohideButton</td><td><code>true</code> or <code>false</code></td></tr>
+        <tr><td>sidebar.verticalTabs, sidebar.position_start</td><td><code>true</code> or <code>false</code></td></tr>
+        <tr><td>wren.mod.&lt;your-id&gt;.*</td><td>anything you like, under your own name, for your own use.</td></tr>
+      </table>
+
+      <h2>try it</h2>
+      <ol>
+        <li>open the mods page in wren: press <code>Alt+Shift+K</code> and type <code>mods</code>.</li>
+        <li>paste your json, or choose the file, and press <em>check it</em>.</li>
+        <li>wren shows the name, the settings and the css. press <em>add mod</em>.</li>
+        <li>change the file and add it again. the new version replaces the old one.</li>
+      </ol>
+
+      <h2>share it</h2>
+      <p>host the json file anywhere and send the link, or let someone download it and add it from the mods page. a place to submit mods to this site is coming. until then, tell people what it does and show a picture.</p>
+
+      <h2>what is coming</h2>
+      <p>mods that move things around, small scripts that you opt into one by one, and a way to publish your own. wren also runs ordinary firefox extensions from the extension shelf, so a mod can sit next to the tools you already use.</p>
+    </article>
+
+    <footer><span><a href="/wren/addons">&larr; all add-ons</a></span><span>tuftle · from <i>tüfteln</i>, to tinker with patience</span></footer>
+  </div>
+</body>
+</html>
