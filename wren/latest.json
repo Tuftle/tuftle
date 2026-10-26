@@ -1,7 +1,7 @@
 {
   "buildID": "20261026141507",
   "version": "159.0a1",
-  "notes": "a new downloads panel, a lighter installer and small fixes.",
+  "notes": "a new downloads panel, an installer that follows your theme, and small fixes.",
   "url": "https://github.com/Tuftle/wren/releases/download/v159.0a1-20261026/Wren-Setup.exe",
   "sha256": "01cbd97aea95e2aee7cba37cfccb9a5b3c550c2e453ea0e0532019fa49c8ddc9"
 }
