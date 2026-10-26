@@ -8,6 +8,19 @@
   <link rel="icon" href="/assets/logo.svg">
   <link rel="stylesheet" href="/assets/style.css">
   <link rel="stylesheet" href="/assets/stage.css">
+  <style>
+    .install-card { background: var(--card); border: 1px solid var(--line); border-radius: 1.2rem; padding: 1.4rem; max-width: 46rem; }
+    .install-head { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
+    .install-head b { display: block; font-size: 1.25rem; font-weight: 400; }
+    .steps { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: .9rem; }
+    .steps li { display: flex; gap: .9rem; align-items: flex-start; }
+    .steps li > span { flex: none; width: 1.8rem; height: 1.8rem; border-radius: 50%; border: 1px solid var(--link); color: var(--link); display: grid; place-items: center; font-size: .9rem; }
+    .steps b { font-weight: 400; color: var(--text); }
+    .steps div { color: var(--soft); }
+    .fine { color: var(--soft); font-size: .9rem; margin: .8rem 0 0; }
+    code { text-transform: none; font-size: .88em; }
+    .hash { display: block; margin-top: .3rem; word-break: break-all; color: var(--text); }
+  </style>
 </head>
 <body>
   <div class="wrap">
@@ -18,10 +31,10 @@
 
     <section class="split">
       <div>
-        <span class="status">in the works &middot; windows first</span>
+        <span class="status">first release &middot; windows 10 and 11</span>
         <h1>a quiet, warm place to browse.</h1>
         <p>wren is a browser that feels like a lamp left on in the next room. nothing is sent home on its own, and nothing follows you around.</p>
-        <div class="row"><button class="btn lg" disabled>download soon</button><a class="btn lg alt" href="/wren/addons">browse add-ons</a></div>
+        <div class="row"><a class="btn lg" href="#install">download for windows</a><a class="btn lg alt" href="/wren/addons">browse add-ons</a></div>
       </div>
       <div class="stage" aria-hidden="true">
 <svg viewBox="0 0 300 400" aria-hidden="true">
@@ -105,12 +118,33 @@
       </div>
     </section>
 
-    <section class="section">
-      <h2>what it does not do (yet)</h2>
-      <p class="sub">wren has no accounts, so there is no sync between your computers. it is also windows-only for now, and the first release is not out. when it is, it will be here.</p>
+    <section class="section" id="install">
+      <h2>install</h2>
+      <p class="sub">one file, no administrator rights. it installs for your account and can be removed from windows settings.</p>
+      <div class="install-card">
+        <div class="install-head">
+          <div>
+            <b>wren 159.0a1</b>
+            <span class="by">windows 10 and 11, 64-bit &middot; about 88 MB</span>
+          </div>
+          <a class="btn lg" href="https://github.com/Tuftle/wren/releases/latest/download/Wren-Setup.exe">download wren-setup.exe</a>
+        </div>
+        <ol class="steps">
+          <li><span>1</span><div><b>download and open the file.</b> wren is not code-signed yet, so windows may show a blue smartscreen box. choose <i>more info</i>, then <i>run anyway</i>.</div></li>
+          <li><span>2</span><div><b>let the egg hatch.</b> the installer puts wren in <code>%localappdata%\Programs\Wren</code> and adds a start menu shortcut. nothing else changes.</div></li>
+          <li><span>3</span><div><b>say hello.</b> on first run wren can bring over bookmarks, history and extensions from a firefox profile on this computer.</div></li>
+        </ol>
+        <p class="fine">to check the download, its sha-256 is <code class="hash">7a9b1f957c7c1438579dd42b67441b571845f015764245f8cb8e5c739dc3438d</code></p>
+      </div>
+      <p class="fine">wren checks for newer versions by itself and asks before it updates. the source is on <a href="https://github.com/Tuftle/wren">github</a>.</p>
     </section>
 
-    <footer><span>tuftle · from <i>tüfteln</i>, to tinker with patience</span><span>made by one person, slowly.</span></footer>
+    <section class="section">
+      <h2>what it does not do (yet)</h2>
+      <p class="sub">wren has no accounts, so there is no sync between your computers. it is windows-only for now, and mac and linux builds have not been made.</p>
+    </section>
+
+    <footer><span>tuftle · from <i>tüfteln</i>, to tinker with patience</span><span>made by tuftle, slowly.</span></footer>
   </div>
   <script src="/assets/stage.js"></script>
 </body>
