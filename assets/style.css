@@ -6,7 +6,7 @@
   :root { --bg: #211c17; --card: #2a231c; --text: #e6dccd; --soft: #9a8b7a; --link: #d9a073; --line: #3a3128; --glow: rgba(217,160,115,.14); }
 }
 * { box-sizing: border-box; }
-html { background: var(--bg); }
+html { background: var(--bg); color-scheme: light dark; }
 body { margin: 0; min-height: 100vh; color: var(--text); font: 17px/1.6 var(--serif); text-transform: lowercase;
   background: radial-gradient(60rem 36rem at 50% -10%, var(--glow), transparent 70%) fixed no-repeat; }
 a { color: var(--link); text-decoration: none; }
