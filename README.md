@@ -19,3 +19,18 @@ style, and nothing is added until the person says yes. Wren answers with `{ tuft
 to detail. That is how Wren and its add-ons are made. A tuft is also the small bundle of feathers on a bird.
 `tuftle.vercel.app` was unused when checked (October 2026), as was tuftle.com in DNS. A web search found no existing
 product with the name. The other name on the shortlist is "nookling".
+
+## Blog
+
+`/blog` is rendered on the server by `api/blog.js`. Posts live in the site's private blob store (`blog/index.json`, `blog/tags.json`,
+`blog/posts/<slug>.json`), never in the repository.
+
+The author's editor is at `/blog/admin`. It opens when the `tuftle_admin` cookie holds the value of the `BLOG_ADMIN_KEY`
+environment variable (or when that key is typed on the page, which sets the cookie). From there you can write a post, upload a
+`.md` file (a front matter block with `title`, `tags`, `date` and `summary` fills in the fields), manage tags, preview, publish,
+save drafts and delete. Every change goes through `api/blog-admin.js`, which checks the cookie, a custom header and the request's
+origin. To change the key: `vercel env rm BLOG_ADMIN_KEY production`, add a new one, and redeploy.
+
+Markdown is turned into HTML with `marked` and cleaned with `sanitize-html`. Both are pinned to versions that work as CommonJS
+on Vercel (`marked` 12 and `sanitize-html` 2.13); newer releases of their dependencies are ES modules only and crash the functions.
+

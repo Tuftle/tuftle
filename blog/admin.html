@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="darkreader-lock">
+  <meta name="robots" content="noindex, nofollow">
+  <title>write · tuftle blog</title>
+  <link rel="icon" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="/assets/blog.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="/"><img src="/assets/logo.svg" alt="">tuftle<small>blog</small></a>
+      <nav class="main"><a href="/blog">blog</a><a href="/blog/admin" aria-current="page">write</a></nav>
+    </header>
+
+    <section id="login" class="panel-box login" hidden>
+      <h2>sign in</h2>
+      <p class="note">this page is for the author. it opens when the <code>tuftle_admin</code> cookie holds the key, or you can enter the key here and it will set the cookie for you.</p>
+      <div class="field"><label for="key">key</label><input type="password" id="key" autocomplete="current-password"></div>
+      <div class="row"><button class="btn" id="signin">sign in</button><span class="note" id="loginNote"></span></div>
+    </section>
+
+    <div id="app" hidden>
+      <div class="row" style="justify-content:space-between;margin-top:1rem">
+        <h1 style="font-weight:400;margin:0;font-size:2.2rem">write.</h1>
+        <span class="row"><a class="btn alt" href="/blog" target="_blank" rel="noopener">view the blog</a><button class="btn alt" id="logout">sign out</button></span>
+      </div>
+
+      <div class="admin">
+        <aside>
+          <div class="panel-box">
+            <h2>posts</h2>
+            <p><button class="btn" id="new">new post</button></p>
+            <ul class="plist" id="plist"></ul>
+          </div>
+          <div class="panel-box" style="margin-top:1rem">
+            <h2>tags</h2>
+            <div class="chips" id="tagpanel"></div>
+            <div class="row" style="margin-top:.8rem"><input type="text" id="newtag" placeholder="new tag" maxlength="29" style="flex:1"><button class="btn alt" id="addtag">add</button></div>
+            <p class="note" id="tagNote"></p>
+          </div>
+        </aside>
+
+        <main class="panel-box">
+          <div class="two">
+            <div class="field"><label for="title">title</label><input type="text" id="title" maxlength="140"></div>
+            <div class="field"><label for="date">date</label><input type="date" id="date"></div>
+          </div>
+          <div class="two">
+            <div class="field"><label for="slug">address <span class="note">(leave empty to make it from the title)</span></label><input type="text" id="slug" maxlength="80" placeholder="my-first-post"></div>
+            <div class="field"><span class="lbl">status</span><b id="status" style="font-weight:400;padding:.55rem 0">new</b></div>
+          </div>
+          <div class="field"><label for="summary">summary <span class="note">(shown in the list and in link previews)</span></label><input type="text" id="summary" maxlength="300"></div>
+          <div class="field"><span class="lbl">tags</span>
+            <div class="tag-edit" id="tagedit"><span id="chosen" class="chips"></span><input type="text" id="taginput" list="tagnames" placeholder="add a tag, then enter" maxlength="29"></div>
+            <datalist id="tagnames"></datalist>
+          </div>
+          <div class="field">
+            <div class="row" style="justify-content:space-between"><label for="body">post (markdown)</label>
+              <span class="row"><button class="btn alt" id="pick">upload a .md file</button><input type="file" id="file" accept=".md,.markdown,.txt,text/markdown,text/plain" hidden><button class="btn alt" id="togglePreview">preview</button></span></div>
+            <textarea id="body" spellcheck="true" placeholder="write here, or upload a markdown file. a front matter block at the top (title, tags, date, summary) fills in the boxes above."></textarea>
+            <div class="preview post-body" id="preview" hidden></div>
+          </div>
+          <div class="row">
+            <button class="btn" id="publish">publish</button>
+            <button class="btn alt" id="draft">save as draft</button>
+            <button class="btn danger" id="delete" hidden>delete</button>
+            <a class="note" id="live" href="#" target="_blank" rel="noopener" hidden>open the live post</a>
+          </div>
+          <p class="note" id="msg" role="status"></p>
+        </main>
+      </div>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const state = { posts: [], tags: [], chosen: [], oldSlug: "", previewing: false };
+
+  async function api(action, data = {}) {
+    const res = await fetch("/api/blog-admin", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "X-Tuftle": "blog" }, body: JSON.stringify({ action, ...data }) });
+    let out = {};
+    try { out = await res.json(); } catch (e) { /* not json */ }
+    if (res.status === 401 && action !== "login") { show("login"); }
+    return { status: res.status, ...out };
+  }
+  const say = (text, bad = false, id = "msg") => { const n = $(id); n.textContent = text; n.className = "note" + (bad ? " bad" : ""); };
+  const show = which => { $("login").hidden = which !== "login"; $("app").hidden = which !== "app"; };
+  const today = () => new Date().toISOString().slice(0, 10);
+
+  // ---------- posts and tags ----------
+  async function refresh() {
+    const r = await api("list");
+    if (!r.ok) { return; }
+    state.posts = r.posts; state.tags = r.tags;
+    const list = $("plist"); list.textContent = "";
+    if (!state.posts.length) { const li = document.createElement("li"); li.textContent = "no posts yet."; li.style.cursor = "default"; list.append(li); }
+    for (const p of state.posts) {
+      const li = document.createElement("li"); if (p.slug === state.oldSlug) { li.className = "on"; }
+      const b = document.createElement("b"); b.textContent = p.title;
+      const s = document.createElement("small"); s.textContent = (p.draft ? "draft" : "published") + " · " + p.date.slice(0, 10);
+      li.append(b, s); li.addEventListener("click", () => openPost(p.slug)); list.append(li);
+    }
+    renderTags();
+  }
+
+  function renderTags() {
+    const counts = {}; for (const p of state.posts) for (const t of p.tags || []) counts[t] = (counts[t] || 0) + 1;
+    const panel = $("tagpanel"); panel.textContent = "";
+    if (!state.tags.length) { panel.textContent = "no tags yet."; panel.className = "note"; } else { panel.className = "chips"; }
+    for (const t of state.tags) {
+      const c = document.createElement("span"); c.className = "chip tag"; c.textContent = t + " " + (counts[t] || 0);
+      if (!counts[t]) { const x = document.createElement("button"); x.textContent = "×"; x.title = "remove this unused tag"; x.addEventListener("click", async () => { const r = await api("tag-remove", { tag: t }); if (r.ok) { state.tags = r.tags; renderTags(); } else { say(r.error || "could not remove it.", true, "tagNote"); } }); c.append(x); }
+      panel.append(c);
+    }
+    const dl = $("tagnames"); dl.textContent = ""; for (const t of state.tags) { const o = document.createElement("option"); o.value = t; dl.append(o); }
+  }
+
+  function renderChosen() {
+    const box = $("chosen"); box.textContent = "";
+    state.chosen.forEach((t, i) => {
+      const c = document.createElement("span"); c.className = "chip tag"; c.textContent = t;
+      const x = document.createElement("button"); x.textContent = "×"; x.type = "button"; x.addEventListener("click", () => { state.chosen.splice(i, 1); renderChosen(); }); c.append(x); box.append(c);
+    });
+  }
+  function takeTag(raw) {
+    const t = String(raw || "").trim().toLowerCase().replace(/\s+/g, " ");
+    if (!t) { return; }
+    if (!/^[a-z0-9][a-z0-9 -]{0,28}$/.test(t)) { say("tags use letters, numbers, spaces and dashes, up to 29 characters.", true); return; }
+    if (state.chosen.length >= 12) { say("a post can have up to 12 tags.", true); return; }
+    if (!state.chosen.includes(t)) { state.chosen.push(t); renderChosen(); }
+  }
+  $("taginput").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === ",") { e.preventDefault(); takeTag($("taginput").value); $("taginput").value = ""; } else if (e.key === "Backspace" && !$("taginput").value) { state.chosen.pop(); renderChosen(); } });
+  $("taginput").addEventListener("change", () => { takeTag($("taginput").value); $("taginput").value = ""; });
+  $("addtag").addEventListener("click", async () => { const r = await api("tag-add", { tag: $("newtag").value }); if (r.ok) { state.tags = r.tags; $("newtag").value = ""; say("", false, "tagNote"); renderTags(); } else { say(r.error || "could not add it.", true, "tagNote"); } });
+  $("newtag").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); $("addtag").click(); } });
+
+  // ---------- the form ----------
+  function fill(p) {
+    $("title").value = p.title || ""; $("slug").value = p.slug || ""; $("date").value = (p.date || today()).slice(0, 10);
+    $("summary").value = p.summary || ""; $("body").value = p.body || ""; state.chosen = [...(p.tags || [])]; renderChosen();
+    state.oldSlug = p.slug || ""; $("status").textContent = p.slug ? (p.draft ? "draft" : "published") : "new";
+    $("delete").hidden = !p.slug; $("live").hidden = !p.slug || !!p.draft; if (p.slug) { $("live").href = "/blog/" + p.slug; }
+    setPreview(false); say("");
+  }
+  async function openPost(slug) { const r = await api("get", { slug }); if (r.ok) { fill(r.post); refresh(); } else { say(r.error || "could not open it.", true); } }
+  $("new").addEventListener("click", () => { fill({ date: today() }); refresh(); });
+
+  async function save(draft) {
+    const data = { title: $("title").value, slug: $("slug").value, oldSlug: state.oldSlug, date: $("date").value, summary: $("summary").value, tags: state.chosen, body: $("body").value, draft };
+    say("saving…");
+    const r = await api("save", data);
+    if (!r.ok) { say(r.error || "could not save.", true); return; }
+    state.oldSlug = r.post.slug; $("slug").value = r.post.slug; $("status").textContent = r.post.draft ? "draft" : "published";
+    $("delete").hidden = false; $("live").hidden = r.post.draft; $("live").href = "/blog/" + r.post.slug;
+    say(draft ? "saved as a draft." : "published. the public page can take about a minute to update.");
+    refresh();
+  }
+  $("publish").addEventListener("click", () => save(false));
+  $("draft").addEventListener("click", () => save(true));
+  $("delete").addEventListener("click", async () => { if (!state.oldSlug || !confirm("delete this post for good?")) { return; } const r = await api("delete", { slug: state.oldSlug }); if (r.ok) { fill({ date: today() }); say("deleted."); refresh(); } else { say(r.error || "could not delete.", true); } });
+
+  // ---------- upload a markdown file ----------
+  function parseMd(text, filename) {
+    let body = text.replace(/^﻿/, "").replace(/\r\n/g, "\n"), meta = {};
+    const m = body.match(/^---\n([\s\S]*?)\n---[ \t]*\n?/);
+    if (m) {
+      body = body.slice(m[0].length);
+      const lines = m[1].split("\n");
+      for (let i = 0; i < lines.length; i++) {
+        const kv = lines[i].match(/^([A-Za-z_][\w-]*):\s*(.*)$/); if (!kv) { continue; }
+        const key = kv[1].toLowerCase(); let val = kv[2].trim().replace(/^["']|["']$/g, "");
+        if (key === "tags" || key === "tag") {
+          let list = [];
+          if (!val) { while (i + 1 < lines.length && /^\s*-\s+/.test(lines[i + 1])) { list.push(lines[++i].replace(/^\s*-\s+/, "")); } }
+          else { list = val.replace(/^\[|\]$/g, "").split(","); }
+          meta.tags = list.map(t => t.trim().replace(/^["']|["']$/g, "")).filter(Boolean);
+        } else { meta[key] = val; }
+      }
+    }
+    if (!meta.title) { const h = body.match(/^\s*#\s+(.+)\n/); if (h) { meta.title = h[1].trim(); body = body.replace(h[0], ""); } }
+    if (!meta.title && filename) { meta.title = filename.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " "); }
+    return { meta, body: body.trim() + "\n" };
+  }
+  $("pick").addEventListener("click", () => $("file").click());
+  $("file").addEventListener("change", async () => {
+    const f = $("file").files[0]; if (!f) { return; }
+    if (f.size > 400000) { say("that file is larger than 400 KB.", true); $("file").value = ""; return; }
+    const { meta, body } = parseMd(await f.text(), f.name);
+    if (state.oldSlug) { fill({ date: today() }); }
+    $("title").value = meta.title || $("title").value; $("body").value = body;
+    if (meta.slug) { $("slug").value = meta.slug; }
+    if (meta.summary || meta.description) { $("summary").value = meta.summary || meta.description; }
+    if (/^\d{4}-\d{2}-\d{2}/.test(meta.date || "")) { $("date").value = meta.date.slice(0, 10); }
+    for (const t of meta.tags || []) { takeTag(t); }
+    $("file").value = ""; say("loaded " + f.name + ". check it, then save as a draft or publish.");
+  });
+
+  // ---------- preview ----------
+  function setPreview(on) { state.previewing = on; $("preview").hidden = !on; $("body").hidden = on; $("togglePreview").textContent = on ? "edit" : "preview"; }
+  $("togglePreview").addEventListener("click", async () => {
+    if (state.previewing) { setPreview(false); return; }
+    const r = await api("preview", { body: $("body").value });
+    if (r.ok) { $("preview").innerHTML = r.html; setPreview(true); } else { say(r.error || "could not preview.", true); }
+  });
+
+  // ---------- signing in and out ----------
+  async function start() {
+    const me = await (await fetch("/api/blog-admin?action=me", { credentials: "same-origin" })).json().catch(() => ({}));
+    if (me.admin) { show("app"); fill({ date: today() }); refresh(); } else { show("login"); }
+  }
+  $("signin").addEventListener("click", async () => {
+    const r = await api("login", { key: $("key").value });
+    if (r.ok) { $("key").value = ""; say("", false, "loginNote"); start(); } else { say(r.error || "could not sign in.", true, "loginNote"); }
+  });
+  $("key").addEventListener("keydown", e => { if (e.key === "Enter") { $("signin").click(); } });
+  $("logout").addEventListener("click", async () => { await api("logout"); location.reload(); });
+  addEventListener("beforeunload", e => { /* nothing to guard: drafts are saved on purpose */ });
+
+  start();
+})();
+</script>
+</body>
+</html>

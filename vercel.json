@@ -26,6 +26,41 @@
           "value": "public, max-age=300"
         }
       ]
+    },
+    {
+      "source": "/blog/admin",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/blog",
+      "destination": "/api/blog?view=index"
+    },
+    {
+      "source": "/blog/feed.xml",
+      "destination": "/api/blog?view=feed"
+    },
+    {
+      "source": "/blog/tag/:tag",
+      "destination": "/api/blog?view=tag&tag=:tag"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/api/blog?view=post&slug=:slug"
     }
   ]
 }

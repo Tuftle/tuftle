@@ -1,0 +1,65 @@
+/* the blog: the list, a post, and the author's editor. Colours come from style.css, so it follows light and dark. */
+
+.post-list { display: grid; gap: 1rem; margin: 1.4rem 0 3rem; }
+.post-card { gap: .45rem; }
+.post-card h3 { font-size: 1.45rem; }
+.post-meta { color: var(--soft); font-size: .9rem; }
+.empty { color: var(--soft); }
+.chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+.chip { font: inherit; font-size: .88rem; text-transform: lowercase; color: var(--soft); background: none; border: 1px solid var(--line); border-radius: 999px; padding: .1em .8em; cursor: pointer; text-decoration: none; }
+.chip:hover { border-color: var(--link); color: var(--text); text-decoration: none; }
+.chip.on { background: var(--link); border-color: var(--link); color: var(--bg); }
+.chip small { opacity: .7; }
+.chip.tag { cursor: default; }
+a.chip.tag { cursor: pointer; }
+.tag-row { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.4rem; }
+
+.post { max-width: 42rem; margin: 0 0 3rem; }
+.post .back { margin: 0 0 1rem; font-size: .95rem; }
+.post h1 { font-weight: 400; font-size: clamp(2rem, 5.5vw, 3rem); line-height: 1.1; margin: 0 0 .6rem; letter-spacing: -.01em; }
+.post .chips { margin: .8rem 0 0; }
+.post-body { text-transform: none; font-size: 1.08rem; line-height: 1.75; margin-top: 1.8rem; overflow-wrap: anywhere; }
+.post-body h1, .post-body h2, .post-body h3, .post-body h4 { font-weight: 400; line-height: 1.2; margin: 2rem 0 .6rem; }
+.post-body h2 { font-size: 1.7rem; }
+.post-body h3 { font-size: 1.3rem; }
+.post-body p, .post-body ul, .post-body ol, .post-body blockquote, .post-body pre, .post-body table { margin: 0 0 1.1rem; }
+.post-body ul, .post-body ol { padding-left: 1.4rem; }
+.post-body li { margin: .25rem 0; }
+.post-body blockquote { border-left: 3px solid var(--link); padding: .1rem 0 .1rem 1rem; color: var(--soft); }
+.post-body code { font-family: ui-monospace, Consolas, monospace; font-size: .9em; background: var(--card); border: 1px solid var(--line); border-radius: .4rem; padding: .05em .35em; }
+.post-body pre { background: var(--card); border: 1px solid var(--line); border-radius: .9rem; padding: 1rem 1.1rem; overflow-x: auto; line-height: 1.5; }
+.post-body pre code { background: none; border: 0; padding: 0; }
+.post-body img { max-width: 100%; height: auto; border-radius: .9rem; }
+.post-body hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+.post-body table { border-collapse: collapse; display: block; overflow-x: auto; }
+.post-body th, .post-body td { border: 1px solid var(--line); padding: .4rem .7rem; }
+.post-body kbd { font-family: ui-monospace, Consolas, monospace; font-size: .85em; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: .35rem; padding: .05em .4em; }
+
+/* ---- the editor ---- */
+.admin { display: grid; grid-template-columns: 17rem minmax(0, 1fr); gap: 1.6rem; align-items: start; margin: 1.2rem 0 3rem; }
+@media (max-width: 52rem) { .admin { grid-template-columns: 1fr; } }
+.panel-box { background: var(--card); border: 1px solid var(--line); border-radius: 1.1rem; padding: 1rem 1.1rem; }
+.panel-box h2 { font-weight: 400; font-size: 1.2rem; margin: 0 0 .7rem; }
+.plist { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.plist li { display: grid; gap: .15rem; border: 1px solid var(--line); border-radius: .8rem; padding: .55rem .7rem; cursor: pointer; }
+.plist li:hover, .plist li.on { border-color: var(--link); }
+.plist b { font-weight: 400; overflow-wrap: anywhere; }
+.plist small { color: var(--soft); }
+.field { display: grid; gap: .3rem; margin: 0 0 1rem; }
+.field > label, .field > .lbl { color: var(--soft); font-size: .9rem; }
+.admin input[type=text], .admin input[type=date], .admin input[type=password], .admin textarea, .login input[type=password] {
+  font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: .8rem; padding: .55rem .8rem; width: 100%; text-transform: none; }
+.admin textarea { font-family: ui-monospace, Consolas, monospace; font-size: .95rem; line-height: 1.55; min-height: 22rem; resize: vertical; }
+.admin input:focus, .admin textarea:focus, .login input:focus { outline: 2px solid color-mix(in srgb, var(--link) 60%, transparent); outline-offset: 1px; }
+.two { display: grid; grid-template-columns: 1fr 12rem; gap: 1rem; }
+@media (max-width: 40rem) { .two { grid-template-columns: 1fr; } }
+.tag-edit { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; border: 1px solid var(--line); border-radius: .8rem; padding: .4rem .5rem; background: var(--bg); }
+.tag-edit input[type=text] { border: 0 !important; background: none !important; flex: 1; min-width: 8rem; padding: .2rem .3rem !important; width: auto !important; }
+.chip button { all: unset; cursor: pointer; margin-left: .3rem; opacity: .7; }
+.chip button:hover { opacity: 1; color: var(--link); }
+.row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+.btn.danger { border-color: #b4553a; color: #b4553a; background: none; }
+.note { color: var(--soft); font-size: .92rem; min-height: 1.4em; }
+.note.bad { color: #b4553a; }
+.preview { border: 1px solid var(--line); border-radius: .9rem; padding: 1rem 1.2rem; background: var(--bg); }
+.login { max-width: 26rem; }
