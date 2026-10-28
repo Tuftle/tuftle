@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="darkreader-lock">
+  <title>burrow · a quiet password manager</title>
+  <meta name="description" content="burrow keeps your logins in one scrambled file that only your master password can open. no accounts, nothing sent anywhere.">
+  <link rel="icon" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/assets/style.css">
+  <style>
+    .install-card { background: var(--card); border: 1px solid var(--line); border-radius: 1.2rem; padding: 1.4rem; max-width: 46rem; }
+    .install-head { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
+    .install-head b { display: block; font-size: 1.25rem; font-weight: 400; }
+    .steps { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: .9rem; }
+    .steps li { display: flex; gap: .9rem; align-items: flex-start; }
+    .steps li > span { flex: none; width: 1.8rem; height: 1.8rem; border-radius: 50%; border: 1px solid var(--link); color: var(--link); display: grid; place-items: center; font-size: .9rem; }
+    .steps b { font-weight: 400; color: var(--text); }
+    .steps div { color: var(--soft); }
+    .fine { color: var(--soft); font-size: .9rem; margin: .8rem 0 0; }
+    code { text-transform: none; font-size: .88em; }
+    .status { color: var(--soft); font-size: .95rem; }
+    .compare { width: 100%; max-width: 46rem; border-collapse: collapse; }
+    .compare th, .compare td { text-align: left; padding: .55rem .6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .compare th { font-weight: 400; color: var(--soft); width: 11rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="/"><img src="/assets/logo.svg" alt="">tuftle</a>
+      <nav class="main"><a href="/wren">wren</a><a href="https://nooksearch.vercel.app">nook</a><a href="/burrow" aria-current="page">burrow</a><a href="/wren/addons">add-ons</a><a href="/blog">blog</a></nav>
+    </header>
+
+    <section class="lead">
+      <span class="status">first release coming &middot; windows 10 and 11, and the web</span>
+      <h1>a quiet place for your passwords.</h1>
+      <p>burrow keeps your logins in one scrambled file that only your master password can open. there are no accounts, and nothing is sent anywhere unless you turn it on.</p>
+      <div class="row"><a class="btn lg" href="#install">download for windows</a><a class="btn lg alt" href="#safe">how it keeps you safe</a></div>
+    </section>
+
+    <section class="section">
+      <h2>what it does</h2>
+      <p class="sub">a short, honest list. everything here works today.</p>
+      <div class="feature-grid">
+        <div class="feature"><h3>one scrambled file</h3><p>your logins are encrypted on your computer before they are saved. the file is useless without your master password.</p></div>
+        <div class="feature"><h3>fills logins in wren</h3><p>open a login page and a small chip offers the right login. it only ever appears for that exact site, and only after you click.</p></div>
+        <div class="feature"><h3>a generator you can remember</h3><p>random characters, or seven plain words like <code>otter-lantern-moss-quill-heron-brook-sage</code>. each word adds eight bits.</p></div>
+        <div class="feature"><h3>one-time codes</h3><p>paste the setup key from a site and burrow shows the six digit code, counting down.</p></div>
+        <div class="feature"><h3>a checkup</h3><p>finds weak and reused passwords on your computer. an optional breach check sends only five characters of a fingerprint, never a password.</p></div>
+        <div class="feature"><h3>bring yours, take yours</h3><p>import from chrome, edge, firefox or bitwarden. export an encrypted backup any time.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="safe">
+      <h2>how it keeps you safe</h2>
+      <p class="sub">in plain words. the longer version is in the <a href="https://github.com/Tuftle/burrow/blob/main/docs/THREAT-MODEL.md">threat model</a>.</p>
+      <table class="compare">
+        <tr><th>your master password</th><td>never saved and never sent. it is stretched with argon2id, a deliberately slow function, so guessing it is expensive.</td></tr>
+        <tr><th>your logins</th><td>encrypted with aes-256-gcm. a changed or damaged file is refused instead of opened.</td></tr>
+        <tr><th>if you forget the password</th><td>the recovery key you saved opens the vault. without both, nobody can, including us. there is no reset.</td></tr>
+        <tr><th>the clipboard</th><td>copied passwords are cleared after twenty seconds.</td></tr>
+        <tr><th>locking</th><td>after five quiet minutes, or at once with the lock button or <code>ctrl+l</code>. in wren, the panic key locks it too.</td></tr>
+        <tr><th>what it cannot do</th><td>protect a computer that already has a keylogger on it, or a master password that is easy to guess.</td></tr>
+      </table>
+    </section>
+
+    <section class="section" id="install">
+      <h2>install</h2>
+      <p class="sub">pick whichever suits you. both are one file and need no administrator rights.</p>
+      <div class="install-card">
+        <div class="install-head">
+          <div>
+            <b>burrow for windows</b>
+            <span class="by">windows 10 and 11, 64-bit &middot; about 6 MB</span>
+          </div>
+          <span class="btn lg" aria-disabled="true" style="opacity:.55;cursor:default">coming soon</span>
+        </div>
+        <ol class="steps">
+          <li><span>1</span><div><b>burrow-setup.exe</b> installs for your account, adds a start menu shortcut, and can be removed from windows settings. an acorn walks into its burrow while it works.</div></li>
+          <li><span>2</span><div><b>burrow-portable.exe</b> is the same app in one file. put it on a usb stick and your vault stays next to it, in a <code>burrow-data</code> folder.</div></li>
+          <li><span>3</span><div><b>in wren</b> burrow is already built in. press <code>alt+shift+v</code> to open it.</div></li>
+        </ol>
+        <p class="fine">burrow is not code-signed yet, so windows may show a blue smartscreen box. choose <i>more info</i>, then <i>run anyway</i>. each release lists its sha-256 so you can check the file.</p>
+      </div>
+      <p class="fine">the source is on <a href="https://github.com/Tuftle/burrow">github</a>.</p>
+    </section>
+
+    <section class="section">
+      <h2>what it does not do (yet)</h2>
+      <p class="sub">burrow has no sync between your computers yet, and it is windows only for now. you can copy the encrypted backup between machines, or keep the vault file in a folder you already sync yourself.</p>
+    </section>
+
+    <footer><span>tuftle · from <i>tüfteln</i>, to tinker with patience</span><span>made by tuftle, slowly.</span></footer>
+  </div>
+</body>
+</html>
