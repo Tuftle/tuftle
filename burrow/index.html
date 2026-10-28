@@ -10,6 +10,7 @@
   <link rel="icon" href="/assets/logo.svg">
   <link rel="stylesheet" href="/assets/style.css">
   <style>
+    .hash { display: block; margin-top: .3rem; word-break: break-all; color: var(--text); }
     .install-card { background: var(--card); border: 1px solid var(--line); border-radius: 1.2rem; padding: 1.4rem; max-width: 46rem; }
     .install-head { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
     .install-head b { display: block; font-size: 1.25rem; font-weight: 400; }
@@ -34,7 +35,7 @@
     </header>
 
     <section class="lead">
-      <span class="status">first release coming &middot; windows 10 and 11, and the web</span>
+      <span class="status">version 0.1.0 &middot; windows 10 and 11, and the web</span>
       <h1>a quiet place for your passwords.</h1>
       <p>burrow keeps your logins in one scrambled file that only your master password can open. there are no accounts, and nothing is sent anywhere unless you turn it on.</p>
       <div class="row"><a class="btn lg" href="#install">download for windows</a><a class="btn lg alt" href="#safe">how it keeps you safe</a></div>
@@ -75,14 +76,14 @@
             <b>burrow for windows</b>
             <span class="by">windows 10 and 11, 64-bit &middot; about 6 MB</span>
           </div>
-          <span class="btn lg" aria-disabled="true" style="opacity:.55;cursor:default">coming soon</span>
+          <a class="btn lg" href="https://github.com/Tuftle/burrow/releases/latest/download/Burrow-Setup.exe">download burrow-setup.exe</a>
         </div>
         <ol class="steps">
           <li><span>1</span><div><b>burrow-setup.exe</b> installs for your account, adds a start menu shortcut, and can be removed from windows settings. an acorn walks into its burrow while it works.</div></li>
-          <li><span>2</span><div><b>burrow-portable.exe</b> is the same app in one file. put it on a usb stick and your vault stays next to it, in a <code>burrow-data</code> folder.</div></li>
+          <li><span>2</span><div><a href="https://github.com/Tuftle/burrow/releases/latest/download/Burrow-Portable.exe"><b>burrow-portable.exe</b></a> is the same app in one file. put it on a usb stick and your vault stays next to it, in a <code>burrow-data</code> folder.</div></li>
           <li><span>3</span><div><b>in wren</b> burrow is already built in. press <code>alt+shift+v</code> to open it.</div></li>
         </ol>
-        <p class="fine">burrow is not code-signed yet, so windows may show a blue smartscreen box. choose <i>more info</i>, then <i>run anyway</i>. each release lists its sha-256 so you can check the file.</p>
+        <p class="fine">burrow is not code-signed yet, so windows may show a blue smartscreen box. choose <i>more info</i>, then <i>run anyway</i>. to check the download, the sha-256 of burrow-setup.exe is <code class="hash">2dbf42822cb96d6e8a17d23177b4251f5cfca78f954d20a43dfebd8045bea5a8</code> and of burrow-portable.exe <code class="hash">ddc7e53b8832d50ae0567b281266378d353216d1b5a92264ee04449d649efcbc</code>.</p>
       </div>
       <p class="fine">the source is on <a href="https://github.com/Tuftle/burrow">github</a>.</p>
     </section>
