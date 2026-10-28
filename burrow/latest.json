@@ -1,8 +1,8 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "released": "2026-10-28",
-  "notes": "the first release.",
-  "url": "https://github.com/Tuftle/burrow/releases/download/v0.1.0/Burrow-Setup.exe",
-  "sha256": "2dbf42822cb96d6e8a17d23177b4251f5cfca78f954d20a43dfebd8045bea5a8",
-  "portableUrl": "https://github.com/Tuftle/burrow/releases/download/v0.1.0/Burrow-Portable.exe"
+  "notes": "update checks in the windows app, and a firefox and chrome extension.",
+  "url": "https://github.com/Tuftle/burrow/releases/download/v0.2.0/Burrow-Setup.exe",
+  "sha256": "190ab6fa3f6b03e039856b3c07e7cb896630c4435ccddba4dc04c2cfeae49d38",
+  "portableUrl": "https://github.com/Tuftle/burrow/releases/download/v0.2.0/Burrow-Portable.exe"
 }
